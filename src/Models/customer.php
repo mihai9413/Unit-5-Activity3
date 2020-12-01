@@ -1,18 +1,18 @@
 <?php
 class customer
 {
-    private $id;
+    private $customerID;
     private $customerName;
 
-    public function __construct($id, $customerName)
+    public function __construct($customerID, $customerName)
     {
         $this->customerName = $customerName;
-        $this->id = $id;
+        $this->customerID = $customerID;
     }
 
-    public function id()
+    public function customerID()
     {
-        return $this->id;
+        return $this->customerID;
     }
 
     public function CustomerName()

@@ -1,7 +1,6 @@
 <?php
 
 include_once 'src/Models/customer.php';
-
 class Repository
 {
     private $db_server = 'Proj-mysql.uopnet.plymouth.ac.uk';
@@ -50,6 +49,41 @@ class Repository
 
         return $resultSet;
     }
+public function getCustomer($customerID)
+{
+
+    $sqlselect = "SELECT * FROM ";
+    $sqlwhere = " WHERE CustomerId = $customerID";
 
 
+    $statement = $this->connection->prepare($sqlselect." Customers ".$sqlwhere);
+    $statement->execute();
+    $resultSet = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $resultSet;
+}
+    public function setCustomer($customerID,$CustomerName){
+        $customer = new customer($customerID,$CustomerName);
+//        echo $customer->Customerid();
+        $sqlinsert = "INSERT INTO ";
+        $sqlvalues = " VALUES (".$customer->Customerid()."," .$customer->CustomerName().");";
+
+
+        $statement = $this->connection->prepare($sqlinsert." Customers ".$sqlvalues);
+        echo $sqlinsert." Customers (customerID, CustomerName) ".$sqlvalues;
+        $statement->execute();
+        //$resultSet = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement;
+
+    }
+//    public function removeCustomer($customerID){
+//        $customer = new customer($customerID);
+//        echo $customer->Customerid();
+//        $sqlinsert = "DELETE FROM ";
+//        $sqlvalues = " WHERE CustomerId=".$customer->Customerid();
+//
+//        $statement = $this->connection->prepare($sqlinsert." Customers ".$sqlvalues);
+//        $statement->execute();
+//        //$resultSet = $statement->fetchAll(PDO::FETCH_ASSOC);
+//        return $statement;
+//    }
 }
